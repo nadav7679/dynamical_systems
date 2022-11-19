@@ -1,0 +1,60 @@
+
+#### Parameters ####
+par Cm = 10
+par G_ca = 2
+par V_ca = 50
+par V_m = -20
+par S_m = 12
+par G_k = 4
+par V_k = -75
+par V_n = -5
+par S_n = 10
+par Tau_n = 43
+par G_kca = 1.7
+par K_d = 0.5
+par V_b = -20
+par S_b = 5.6
+par F_c = 0.01
+par alpha = 0.0015
+par K_c = 0.16	
+par r = 10
+
+# par G_bk = 0.4
+G_bk = G_k/r
+
+#### Functions ####
+
+GAMMAF(x,y,z)=1.0/(1.0+exp((x-y)/z))
+
+m_inf = GAMMAF(V_m, V, S_m)
+n_inf = GAMMAF(V_n, V, S_n)
+b_inf = GAMMAF(V_b, V, S_b)
+s_inf = (c^2)/((c^2)+(K_d^2))
+
+
+
+
+#### ODE's ####
+
+V' = -(I_ca + I_k + I_kca + I_bk)/Cm
+n' = (n_inf-n)/Tau_n 
+c' = -F_c*(alpha*I_ca + K_c*c)
+
+#### Numerics ####
+
+
+ot = T, yplot = V 
+@ Ttotal = 15000
+@ METH = rungekutta
+@ XLO=0.0, XHI=0.5, YLO=-0.06, YHI=0.06
+@ Dt = 0.02
+@ Bounds = 100000
+@ xlo=0, xhi=3000, ylo=-85, yhi=10, bell=0
+
+
+v(0)=-60
+n(0)=0.1 
+c(0)=0.1
+
+
+done

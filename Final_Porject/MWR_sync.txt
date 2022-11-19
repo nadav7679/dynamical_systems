@@ -1,0 +1,68 @@
+#### Numbers ####
+
+
+
+#### Parameters ####
+p k1 = 30
+p k2 = 1
+p k3 = 10
+p k4 = 1
+p k5 = 16.5
+p k_5 = 0.5
+p k_1 = 0.25
+p c1 = 1
+p c2 = 0
+p c3 = 0
+
+#### Initial Conditions ####
+x1(0) = 1
+x2(0) = 1
+x3(0) = 1
+
+y1(0) = 1.5
+y2(0) = 1.5
+y3(0) = 1.5
+
+z1(0) = 1
+z2(0) = 1
+z3(0) = 1
+
+#### ODE's ####
+dx1/dt = k1*x1 - k_1*(x1^2) - k2*x1*x2 -k4*x1*x3
+dx2/dt = k2*x1*x2 - k3*x2
+dx3/dt = -k4*x1*x3 + k5*x3 -k_5*(x3^2)
+
+dy1/dt = k1*y1 - k_1*(y1^2) - k2*y1*y2 -k4*y1*y3 + c1*z1*(y1-x1)
+dy2/dt = k2*y1*y2 - k3*y2 + c2*z2*(y2-x2)
+dy3/dt = -k4*y1*y3 + k5*y3 -k_5*(y3^2) + c3*z3*(y3-x3)
+
+dz1/dt = -(y1-x1)^2
+dz2/dt = -(y2-x2)^2
+dz3/dt = -(y3-x3)^2
+
+#### Numerics ####
+@ MAXSTOR=16000000
+@ BACK=Black
+@ XP=x1
+@ YP=x2
+@ ZP=x3
+@ AXES=3
+@ TOTAL=1000.0
+@ DT=0.01
+@ NJMP=1
+@ T0=0.0
+@ TRANS=0.0
+@ NMESH=40
+@ METH=rungekutta
+@ DTMIN=0.001
+@ DTMAX=1.0
+@ TOLER=0.00001
+@ BOUND=100000.0
+@ DELAY=0.0
+@ XLO=0.0, XHI=1000.0, YLO=-90.0, YHI=50.0
+@ NTST=50,NMAX=20000,NPR=50
+@ DS=0.02,DSMIN=0.001,DSMAX=0.5
+@ PARMIN=-10,PARMAX=200,NORMMIN=0.0,NORMMAX=10000.0
+@ AUTOVAR=V,AUTOXMIN=-10.0,AUTOXMAX=100.0,AUTOYMIN=-90.0,AUTOYMAX=90.0
+
+done
